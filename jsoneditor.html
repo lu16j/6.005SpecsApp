@@ -5,7 +5,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
         <script src="http://web.mit.edu/lu16j/www/boots/bootstrap/js/bootstrap.min.js"></script>
+        <script src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
         <script src="jsoneditor.js"></script>
+        <script src="db.js"></script>
         <link href="http://web.mit.edu/lu16j/www/boots/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://web.mit.edu/lu16j/www/boots/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="jsoneditor.css" rel="stylesheet" type="text/css">
@@ -23,16 +25,14 @@
             <p>Enter the spec in the text area. Add more specs if necessary.</p>
             <div class="specs">
                 <div class="spec1">
-                    <span>
                         <input class="name" style="width:78px" type="text" placeholder="Spec name...">
                         <input class="intersects" style="width:78px" type="text" placeholder="Intersections">
                         <input class="contains" style="width:78px" type="text" placeholder="Contains"><br>
-                    </span>
-                    <textarea class="input-xlarge" rows="4" placeholder="Enter spec..."></textarea><br><br>
+                    <textarea class="input-xlarge" rows="4" placeholder="Enter spec..."></textarea>
+                    <button data-spec="1" class="dec btn btn-info" class="btn btn-primary">Remove Spec</button>
                 </div>
-            </div>
+            </div><br>
             <button class="add btn btn-info" class="btn btn-primary">Add Spec</button>
-            <button class="dec btn btn-info" class="btn btn-primary">Remove Spec</button>
             
             <h3>
                 Implementation:
@@ -54,9 +54,10 @@
             <br><br>
             <p>
                 <h3>JSON code</h3>
-                Insert into the array 'testJSON' in questions.js.
+                Insert into the questions text area.
             </p>
             <pre id="result"></pre>
+       
         </div>
     </body>
 </html>

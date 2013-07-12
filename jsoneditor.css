@@ -12,6 +12,7 @@
 .specs div {
     width: 290px;
     display: inline-block;
+    margin-top: 15px;
 }
 
 input {

@@ -75,14 +75,17 @@ $(document).ready(function() {
     function addSpec() {
         console.log("here");
         counterspec += 1; 
-        var spec = $("<div style='margin-right: 5px;' class='spec" + counterspec +  "'><span><input class='name' style='width:78px; margin-right: 4px;' type='text' placeholder='Spec name...'><input class='intersects' style='width:78px; margin-right: 4px;' type='text' placeholder='Intersections'><input class='contains' style='width:78px' type='text' placeholder='Contains'></span><br><textarea class='input-xlarge' rows='4' placeholder='Enter spec...'></textarea><br><br></div>");
+        var spec = $("<div style='margin-right: 5px; margin-top: 15px;' class='spec" + counterspec +  "'><input class='name' style='width:78px; margin-right: 4px;' type='text' placeholder='Spec name...'><input class='intersects' style='width:78px; margin-right: 4px;' type='text' placeholder='Intersections'><input class='contains' style='width:78px' type='text' placeholder='Contains'><br><textarea class='input-xlarge' rows='4' placeholder='Enter spec...'></textarea><button data-spec='" +counterspec + "' class='dec btn btn-info' class='btn btn-primary'>Remove Spec</button></div>");
+        spec.find("button").on('click', function() {
+            decSpec($(this).attr("data-spec"));
+        });
         $(".specs").append(spec);
     }
     
         
-    function decSpec() {
-        $(".spec" + counterspec).remove();
-        counterspec -= 1;
+    function decSpec(specNum) {
+        $(".spec" + specNum).remove();
+
         
         
     }
@@ -102,9 +105,14 @@ $(document).ready(function() {
     }
     
     $(".add").on('click', addSpec);
-    $(".dec").on('click', decSpec);
+    $(".dec").each(function() {
+        $(this).on('click', function() {
+            console.log("made it!");
+            decSpec($(this).attr("data-spec"));
+        })
+    });
     
     $(".addi").on('click', addImple);
-    $(".deci").on('click', decImple);
+    $(".dec").on('click', decSpec);
     $("button[type='submit']").on('click', submit);
 });
