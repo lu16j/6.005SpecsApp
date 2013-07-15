@@ -92,16 +92,19 @@ $(document).ready(function() {
     
     function addImple() {
         counterimple += 1;
-        var imple = $('<div class="imple' + counterimple + '">' +
+        var imple = $('<div style="margin-bottom:15px" class="imple' + counterimple + '">' +
                     '<input class="name span6" type="text" placeholder="Implementation name..."><br>' +
-                    '<textarea class="span6" style="height: 200px" placeholder="Enter implementation"></textarea>' +
-                '</div>');
+                    '<textarea class="span6" style="height: 200px" placeholder="Enter implementation"></textarea><br>' +
+                    '<button data-imple="' + counterimple + '" class="deci btn btn-info" class="btn btn-primary">Remove Implementation</button>' +
+                    '</div>');
+        imple.find("button").on('click', function() {
+           decImple($(this).attr("data-imple")); 
+        });
         $(".imple").append(imple);     
     }
     
-    function decImple() {
-        $(".imple" + counterimple).remove();
-        counterimple -= 1;  
+    function decImple(impleNum) {
+        $(".imple" + impleNum).remove();
     }
     
     $(".add").on('click', addSpec);
@@ -112,7 +115,11 @@ $(document).ready(function() {
         })
     });
     
-    $(".addi").on('click', addImple);
-    $(".deci").on('click', decImple);
+   $(".addi").on('click', addImple);
+    $(".deci").each(function() {
+        $(this).on('click', function() {
+          decImple($(this).attr("data-imple"));  
+        });
+    });
     $("button[type='submit']").on('click', submit);
 });
