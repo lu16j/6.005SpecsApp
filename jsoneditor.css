@@ -17,6 +17,8 @@
 
 .imple div {
     margin-bottom: 15px;
+    padding: 5px 25px;
+    display: inline-block;
 }
 
 input {
@@ -25,14 +27,32 @@ input {
 
 #result {
     background: #eee;
+    width: 550px;
     padding: 10px;
-    height: 100px;
-    overflow: auto;
+    height: 120px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 10px;
     
 }
 
-/*.imple {
+select {
     position: relative;
-    width: 600px;
-    margin: auto auto;
-}*/
+    margin-left: 50px;
+    width: 200px;
+    height: 200px;
+
+}
+
+.questions div {
+    display: inline-block;
+    float: left;
+}
+
+.selected {
+    background-color: lightyellow;
+}
+
+.unselected {
+    background-color: #eee;
+}

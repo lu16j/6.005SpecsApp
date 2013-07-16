@@ -7,7 +7,6 @@
         <script src="http://web.mit.edu/lu16j/www/boots/bootstrap/js/bootstrap.min.js"></script>
         <script src="http://www.parsecdn.com/js/parse-1.2.8.min.js"></script>
         <script src="jsoneditor.js"></script>
-        <script src="db.js"></script>
         <link href="http://web.mit.edu/lu16j/www/boots/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="http://web.mit.edu/lu16j/www/boots/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="jsoneditor.css" rel="stylesheet" type="text/css">
@@ -40,24 +39,23 @@
             <p>Enter the implentation in the text area.</p>
             <div class="imple">
                 <div class="imple1">
-                    <input class="name span6" type="text" placeholder="Implementation name..."><br>
-                    <textarea class="span6" style="height: 200px" placeholder="Enter implementation"></textarea><br>
+                    <input class="name span4" type="text" placeholder="Implementation name..."><br>
+                    <textarea class="span4" style="height: 200px" placeholder="Enter implementation"></textarea><br>
                     <button data-imple="1" class="deci btn btn-info" class="btn btn-primary">Remove Implementation</button>
                 </div>
             </div><br>
             <div class="row-fluid">
-                
                 <button class="addi btn btn-info" class="btn btn-primary">Add Implementation</button><br><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
-                
-                
             </div>
             <br><br>
-            <p>
-                <h3>JSON code</h3>
-                Insert into the questions text area.
-            </p>
-            <pre id="result"></pre>
+            <p><h3>JSON code</h3>
+            Insert into the questions text area.</p>
+            <div class="questions">
+                <div id="result"></div>
+                <select multiple="multiple" style="height: 140px"></select>
+            </div>
+            
        
         </div>
     </body>
