@@ -49,10 +49,7 @@ select {
     float: left;
 }
 
-.selected {
-    background-color: lightyellow;
-}
 
-.unselected {
-    background-color: #eee;
+p.highlight {
+    background-color: lightyellow;
 }

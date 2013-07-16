@@ -32,6 +32,7 @@ $(document).ready(function() {
     var numOfOps = 0;
     var questions = []; //array of all the question objects
     var selectBox = $("select");
+    var clicked = false;
     
     
     function submit() {
@@ -101,38 +102,16 @@ $(document).ready(function() {
         
         var JSONstring = JSON.stringify(jsonThing);
         numOfOps++;
-        $("#result").append("<p class='unselected' id='" + numOfOps + "'>" + JSONstring + "</p>");
+        $("#result").append("<p id='p" + numOfOps + "'>" + JSONstring + "</p>");
         questions.push(new Question(JSONstring, numOfOps))
 
         var str = String(questions[numOfOps-1].getNumber());
         var optionEl = "<option>" + str + "</option>";
         questions[numOfOps-1].setObj(optionEl);
         selectBox.append(questions[numOfOps-1].getObj());
+        clicked = true;
         
-        $("select option").each(function() {
-            $(this).on('click', function() {
-                console.log('clicked');
-                var questionsNum = $(this).text();
-                if ($("#" + questionsNum).hasClass("unselected")) {
-                    console.log("here");
-                    $("#" + questionsNum).removeClass("unselected");
-                    $("#" + questionsNum).addClass("selected");
-                }
-                else {
-                    console.log('sup');
-                    $("#" + questionsNum).removeClass("selected");
-                    $("#" + questionsNum).addClass("unselected");
-                }
-
-            }); 
-        });
         
-    }
-    
-    function searchQuestions(qnum) {
-        console.log($("p " + qnum));
-        $
-
     }
     
     var counterspec = 1; 
@@ -141,7 +120,12 @@ $(document).ready(function() {
     function addSpec() {
         console.log("here");
         counterspec += 1; 
-        var spec = $("<div style='margin-right: 5px; margin-top: 15px;' class='spec" + counterspec +  "'><input class='name' style='width:78px; margin-right: 4px;' type='text' placeholder='Spec name...'><input class='intersects' style='width:78px; margin-right: 4px;' type='text' placeholder='Intersections'><input class='contains' style='width:78px' type='text' placeholder='Contains'><br><textarea class='input-xlarge' rows='4' placeholder='Enter spec...'></textarea><button data-spec='" +counterspec + "' class='dec btn btn-info' class='btn btn-primary'>Remove Spec</button></div>");
+        var spec = $("<div style='margin-right: 5px; margin-top: 15px;' class='spec" + counterspec +  "'>\
+                    <input class='name' style='width:78px; margin-right: 4px;' type='text' placeholder='Spec name...'>\
+                    <input class='intersects' style='width:78px; margin-right: 4px;' type='text' placeholder='Intersections'>\
+                    <input class='contains' style='width:78px' type='text' placeholder='Contains'><br>\
+                    <textarea class='input-xlarge' rows='4' placeholder='Enter spec...'></textarea>\
+                    <button data-spec='" +counterspec + "' class='dec btn btn-info' class='btn btn-primary'>Remove Spec</button></div>");
         spec.find("button").on('click', function() {
             decSpec($(this).attr("data-spec"));
         });
@@ -189,7 +173,14 @@ $(document).ready(function() {
     });
     $("button[type='submit']").on('click', submit);
     
-    
-    
+    $("select option").each(function() {
+            $(this).on('click', function() {
+                if (clicked) {
+                    var objName = "p"+$(this).val();
+                    var id = "#" + objName;
+                    $(id).toggleClass('highlight');
+                }
+            });
+        });
         
 });
