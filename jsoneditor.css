@@ -72,4 +72,5 @@ pre {
 
 textarea {
     white-space: pre;
+    height: 200px;
 }
