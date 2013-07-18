@@ -16,50 +16,57 @@
     </head>
     <body>
         <div class="container"> 
-            <div class="head">
-                <h1>JSON Editor</h1>
-                <p>Enter in your specs and the implementation!</p>
-            </div>
-            <br>
-            <h3>
-                Specs:
-            </h3>
-            <p>Enter the spec in the text area. Add more specs if necessary.</p>
-            <div class="specs">
-                <div class="spec1">
-                        <input class="name" style="width:78px" type="text" placeholder="Spec name...">
-                        <input class="intersects" style="width:78px" type="text" placeholder="Intersections">
-                        <input class="contains" style="width:78px" type="text" placeholder="Contains"><br>
-                    <textarea class="input-xlarge" rows="4" placeholder="Enter spec..."></textarea>
-                    <button data-spec="1" class="dec btn btn-info" class="btn btn-primary">Remove Spec</button>
+            <div class="editableSpecImpl">
+                <div class="head">
+                    <h1>JSON Editor</h1>
+                    <p>Enter in your specs and the implementation!</p>
                 </div>
-            </div><br>
-            <button class="add btn btn-info" class="btn btn-primary">Add Spec</button>
-            
-            <h3>
-                Implementation:
-            </h3>
-            <p>Enter the implentation in the text area.</p>
-            <div class="imple">
-                <div class="imple1">
-                    <input class="name span4" type="text" placeholder="Implementation name..."><br>
-                    <textarea class="span4" style="height: 200px" placeholder="Enter implementation"></textarea><br>
-                    <button data-imple="1" class="deci btn btn-info" class="btn btn-primary">Remove Implementation</button>
+                <br>
+                <h3>
+                    Specs:
+                </h3>
+                <p>Enter the spec in the text area. Add more specs if necessary.</p>
+                <div class="specs">
+                    <div class="spec1">
+                            <input class="name" style="width:78px" type="text" placeholder="Spec name...">
+                            <input class="intersects" style="width:78px" type="text" placeholder="Intersections">
+                            <input class="contains" style="width:78px" type="text" placeholder="Contains"><br>
+                        <textarea class="input-xlarge" rows="4" placeholder="Enter spec..."></textarea>
+                        <button data-spec="1" class="dec btn btn-info" class="btn btn-primary">Remove Spec</button>
+                    </div>
+                </div><br>
+                <button class="add btn btn-info" class="btn btn-primary">Add Spec</button>
+                
+                <h3>
+                    Implementation:
+                </h3>
+                <p>Enter the implentation in the text area.</p>
+                <div class="imple">
+                    <div class="imple1">
+                        <input class="name span4" type="text" placeholder="Implementation name..."><br>
+                        <textarea class="span4" style="height: 200px" placeholder="Enter implementation"></textarea><br>
+                        <button data-imple="1" class="deci btn btn-info" class="btn btn-primary">Remove Implementation</button>
+                    </div>
+                </div><br>
+                <div class="row-fluid">
+                    <button class="addi btn btn-info" class="btn btn-primary">Add Implementation</button><br><br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </div><br>
-            <div class="row-fluid">
-                <button class="addi btn btn-info" class="btn btn-primary">Add Implementation</button><br><br>
-                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
             <br><br>
             <p><h3>JSON code</h3>
             Insert into the questions text area.</p>
             <div class="questions">
-                <div id="result"></div>
-                <select multiple="multiple" style="height: 140px"></select>
+                    <div id="result"></div>
+                    <select id="selectionBox" multiple="multiple" style="height: 140px"></select>
+                    
+                    <div class="opButtons">
+                        <button id="edit" class="btn disabled"><i class="icon-pencil"></i> Edit</button>
+                        <button id="delete" class="btn disabled"><i class="icon-trash"></i> Delete</button>
+                    </div>
             </div>
             
-       
+            
         </div>
     </body>
 </html>

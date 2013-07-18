@@ -9,7 +9,7 @@
     text-align: center;
 }
 
-.specs div {
+.specs div{
     width: 290px;
     display: inline-block;
     margin-top: 15px;
@@ -37,11 +37,10 @@ input {
 }
 
 select {
-    position: relative;
-    margin-left: 50px;
+    margin-left: 10px;
     width: 200px;
     height: 200px;
-
+    float: left;
 }
 
 .questions div {
@@ -50,6 +49,18 @@ select {
 }
 
 
-p.highlight {
+.highlight {
     background-color: lightyellow;
+}
+
+.opButtons {
+    float: left;
+    position: relative;
+    margin-left: 10px;
+    width: 100px;
+    height: 140px;
+}
+
+.opButtons button {
+    margin-bottom: 5px;
 }
