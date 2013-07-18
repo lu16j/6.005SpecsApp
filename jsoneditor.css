@@ -10,14 +10,15 @@
 }
 
 .specs div{
-    width: 290px;
+    width: 365px;
+    margin-right: 18px;
     display: inline-block;
-    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 .imple div {
     margin-bottom: 15px;
-    padding: 5px 25px;
+    margin-right: 20px;
     display: inline-block;
 }
 
@@ -26,6 +27,7 @@ input {
 }
 
 #result {
+    display: inline-block;
     background: #eee;
     width: 550px;
     padding: 10px;
@@ -48,6 +50,9 @@ select {
     float: left;
 }
 
+pre {
+    float: left;
+}
 
 .highlight {
     background-color: lightyellow;
@@ -63,4 +68,8 @@ select {
 
 .opButtons button {
     margin-bottom: 5px;
+}
+
+textarea {
+    white-space: pre;
 }

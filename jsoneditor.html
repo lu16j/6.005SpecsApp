@@ -19,7 +19,9 @@
             <div class="editableSpecImpl">
                 <div class="head">
                     <h1>JSON Editor</h1>
-                    <p>Enter in your specs and the implementation!</p>
+                    <p>Enter in your specs and the implementation!<br> What you type here is what you will
+                    see in the application itself.<br> This means that if a word breaks in the middle, the word
+                    break will appear in the app.</p>
                 </div>
                 <br>
                 <h3>
@@ -28,10 +30,10 @@
                 <p>Enter the spec in the text area. Add more specs if necessary.</p>
                 <div class="specs">
                     <div class="spec1">
-                            <input class="name" style="width:78px" type="text" placeholder="Spec name...">
-                            <input class="intersects" style="width:78px" type="text" placeholder="Intersections">
-                            <input class="contains" style="width:78px" type="text" placeholder="Contains"><br>
-                        <textarea class="input-xlarge" rows="4" placeholder="Enter spec..."></textarea>
+                            <input class="name" style="width:105px; font-family: monospace" type="text" placeholder="Spec name...">
+                            <input class="intersects" style="width:104px; font-family: monospace" type="text" placeholder="Intersections">
+                            <input class="contains" style="width:104px; font-family: monospace" type="text" placeholder="Contains"><br>
+                        <textarea class="input-xlarge" style="font-family: monospace; width: 350px" rows="4" placeholder="Enter spec..."></textarea>
                         <button data-spec="1" class="dec btn btn-info" class="btn btn-primary">Remove Spec</button>
                     </div>
                 </div><br>
@@ -43,8 +45,8 @@
                 <p>Enter the implentation in the text area.</p>
                 <div class="imple">
                     <div class="imple1">
-                        <input class="name span4" type="text" placeholder="Implementation name..."><br>
-                        <textarea class="span4" style="height: 200px" placeholder="Enter implementation"></textarea><br>
+                        <input class="name span4" style="width: 350px; font-family: monospace" type="text" placeholder="Implementation name..."><br>
+                        <textarea class="span4" style="width: 350px; height: 200px; font-family: monospace" placeholder="Enter implementation"></textarea><br>
                         <button data-imple="1" class="deci btn btn-info" class="btn btn-primary">Remove Implementation</button>
                     </div>
                 </div><br>
@@ -55,7 +57,7 @@
             </div>
             <br><br>
             <p><h3>JSON code</h3>
-            Insert into the questions text area.</p>
+            Insert into the questions text area.</p><br><br>
             <div class="questions">
                     <div id="result"></div>
                     <select id="selectionBox" multiple="multiple" style="height: 140px"></select>

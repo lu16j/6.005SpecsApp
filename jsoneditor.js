@@ -1,3 +1,6 @@
+/*
+Question Object
+*/
 function Question(text, number, htmlObject, htmlForm) {
     this.text = text;
     this.number = number;
@@ -35,55 +38,66 @@ Question.prototype = {
 
 
 $(document).ready(function() {
-    var numOfOps = 0;
-    var questions = []; //array of all the question objects
-    var selectBox = $("select");
-    var editMode = false;
+    var numOfOps = 0;               //keeps track of the options in the selection box
+    var questions = [];             //array of all the question objects
+    var selectBox = $("select");    //selection box
+    var editMode = false;           
     
-    
+    /*
+    Takes values from the inputs and text areas and places the json string into the results
+    div as a question. Initiates a Question object from the inputs
+    */
     function submit() {
-        var JSONstring = JSONify();
-        editMode = false;
-        console.log("current mode: ", editMode);
+        var JSONstring = JSONify();  //grabs json string
+        editMode = false; //changes mode back
         
         numOfOps++;
-        $("#result").append("<p id='p" + numOfOps + "'>" + JSONstring + "</p>");
+        $("#result").append("<pre id='p" + numOfOps + "'>" + JSONstring + ", </pre>");
         questions.push(new Question(JSONstring, numOfOps))
 
-        console.log('numOfOps after shit: ',numOfOps);
-        console.log('question(submit): ', questions);
-        var str = String(questions[numOfOps-1].getNumber());
+        var str = String(questions[numOfOps-1].getNumber()); //get question number
         var optionEl = $("<option></option>");
-        var formState = $('.editableSpecImpl').html();
+        var formState = $('.editableSpecImpl').html(); //saves all inputs for the question
+        
         questions[numOfOps-1].setForm(formState);
         questions[numOfOps-1].setObj(optionEl.html(str));
        
         selectBox.append(questions[numOfOps-1].getObj());  
-        resetForm();
+        resetForm(); //clears form
     }
     
+    /*
+    Updates input for a question that already has been submited. 
+    Also updates the Question object being edited.
+    @param num - a positive integer representing the index of the question being edited
+    */
     function save(num) {
-        var formState = $('.editableSpecImpl').html();
-        var updatedStr = JSONify();
+        var formState = $('.editableSpecImpl').html(); //grabs new formstate
+        var updatedStr = JSONify(); 
         questions[num].setForm(formState);
         questions[num].setText(updatedStr);
-        $("#p" + (parseInt(num)+1)).html(questions[num].getText());
-        console.log("updating p", num+1);
-        console.log("new form text: ", JSONify());
-        editMode = false;
-        bind();
+        $("#p" + (parseInt(num)+1)).html(questions[num].getText() +', ');
+        editMode = false; //reset mode
+        bind(); //rebind all the events for the buttons
         resetForm();
     }
     
+    /*
+    Clears all inputs and textareas
+    */
     function resetForm() {
         $('input').each(function() {
             $(this).val("");
         });
         $('textarea').each(function() {
-            $(this).html("");
+            $(this).val("");
         });
     }
     
+    /*
+    Formats the user's inputs
+    @return JSON string
+    */
     function JSONify() {
         var colors = {
             "pink":"rgba(255,192,203,1)",
@@ -102,6 +116,7 @@ $(document).ready(function() {
             "darkgrey":"rgba(169,169,169,1)",
         };
         
+        //gives specs and impls their colors 
         function randomColor(opacity) {
             var result;
             var count = 0;
@@ -113,6 +128,7 @@ $(document).ready(function() {
             return output;
         }
         
+        //grabs inputs from forms and places them into dict to be formatted
         var jsonThing = {};
         jsonThing['specs'] = {}
         $('.specs div').each(function () {
@@ -157,13 +173,16 @@ $(document).ready(function() {
     var counterspec = 1; 
     var counterimple = 1;
 
+    /*
+    Adds a spec form to the Specs div
+    */
     function addSpec() {
         counterspec += 1; 
-        var spec = $("<div style='margin-right: 5px; margin-top: 15px;' class='spec" + counterspec +  "'>\
-                    <input class='name' style='width:78px' type='text' placeholder='Spec name...'>\
-                    <input class='intersects' style='width:78px' type='text' placeholder='Intersections'>\
-                    <input class='contains' style='width:78px' type='text' placeholder='Contains'><br>\
-                    <textarea class='input-xlarge' rows='4' placeholder='Enter spec...'></textarea>\
+        var spec = $("<div style='margin-right: 20px; margin-bottom: 15px;' class='spec" + counterspec +  "'>\
+                    <input class='name' style='width:104px; font-family: monospace' type='text' placeholder='Spec name...'>\
+                    <input class='intersects' style='width:104px; font-family: monospace' type='text' placeholder='Intersections'>\
+                    <input class='contains' style='width:104px; font-family: monospace' type='text' placeholder='Contains'><br>\
+                    <textarea style='font-family: monospace; width: 350px' class='input-xlarge' rows='4' placeholder='Enter spec...'></textarea>\
                     <button data-spec='" +counterspec + "' class='dec btn btn-info' class='btn btn-primary'>Remove Spec</button></div>");
         spec.find("button").on('click', function() {
             decSpec($(this).attr("data-spec"));
@@ -171,7 +190,9 @@ $(document).ready(function() {
         $(".specs").append(spec);
     }
     
-        
+    /*
+    Removes a spec form to the Specs div
+    */    
     function decSpec(specNum) {
         $(".spec" + specNum).remove();
 
@@ -179,11 +200,14 @@ $(document).ready(function() {
         
     }
     
+    /*
+    Adds an impl form to the Imples div
+    */
     function addImple() {
         counterimple += 1;
-        var imple = $('<div style="margin-bottom:15px; padding: 5px 25px" class="imple' + counterimple + '">' +
-                    '<input class="name span4" type="text" placeholder="Implementation name..."><br>' +
-                    '<textarea class="span4" style="height: 200px" placeholder="Enter implementation"></textarea><br>' +
+        var imple = $('<div style="margin-bottom:15px; margin-right: 10px" class="imple' + counterimple + '">' +
+                    '<input class="name span4" style="width: 350px; font-family: monospace" type="text" placeholder="Implementation name..."><br>' +
+                    '<textarea class="span4" style="width: 350px; height: 200px; margin-right: 15px; font-family: monospace" placeholder="Enter implementation"></textarea><br>' +
                     '<button data-imple="' + counterimple + '" class="deci btn btn-info" class="btn btn-primary">Remove Implementation</button>' +
                     '</div>');
         imple.find("button").on('click', function() {
@@ -192,11 +216,16 @@ $(document).ready(function() {
         $(".imple").append(imple);     
     }
     
+    /*
+    Removes an impl form to the Ipmles div
+    */
     function decImple(impleNum) {
         $(".imple" + impleNum).remove();
     }
     
-    //add bind again if messes up
+    /*
+    Connects all the event listeners to their objects
+    */
     function bind(num) {
         $(".add").off();
         $(".add").on('click', addSpec);
@@ -243,10 +272,13 @@ $(document).ready(function() {
     
     bind();
     
+    /*
+    Highlights the selected paragraph element
+    */
     function highlight(num) {
         var n = num;
         var pObj = $('#p' + n);
-        var allPObj = $('#result p');
+        var allPObj = $('#result pre');
         allPObj.removeClass('highlight');
         pObj.toggleClass('highlight');
     }
@@ -262,7 +294,7 @@ $(document).ready(function() {
         
         editbutton.off('click');
         editbutton.on('click', function() {
-            editMode = true;
+            editMode = true; //turns on edit mode
             editSpec(parseInt(strOp-1));
         });
         
@@ -275,14 +307,10 @@ $(document).ready(function() {
     
     
     
-    
+    /*
+    Deletes the question from the selection box and updates all views and objects accordingly
+    */
     function deleteSpec(qnum) {
-        /*when I delete I want to remove the paragraph in the results box, 
-        the option in the select box
-        the question object from the array
-        i must also decrement the numbers of the rest of the questions in the array if random question was deleted
-        */
-
         if (numOfOps != 0) {
             numOfOps -= 1;
         }
@@ -293,7 +321,6 @@ $(document).ready(function() {
         
         if (qnum == 0) {
             questions.splice(0, 1);
-            console.log(questions);
             for (q in questions) {
                 var num = questions[q].getNumber();
                 questions[q].setNumber(num-1);
@@ -301,7 +328,6 @@ $(document).ready(function() {
             }
         }
         else if ((qnum > 0) && (qnum < questions.length)) {
-            console.log('middle: ', qnum);
             questions.splice(qnum, 1)
             for (q in questions) {
                 var num = questions[q].getNumber();
@@ -316,20 +342,23 @@ $(document).ready(function() {
         $("#selectionBox option").each(function() {
                 if ($(this).val() > qnum) {
                     var n = $(this).val();
-                    console.log('option el: ', n);
                     $('#p' + n).attr('id', 'p'+String(n-1));
                     $(this).html(String(n-1));
                 }
         });
         $('.opButtons button').addClass('disabled');
-        console.log('questions: ',questions);
-        //update id on paragraph element!
         
+        if ($('select').empty()) {
+            editMode = false;
+        }
+        bind();
     }
     
+    /*
+    Grabs the saved form and places it in the view to be saved 
+    */
     function editSpec(qnum) {
         var form = questions[qnum].getForm();
-        console.log('form length: ', form.length);
         var specImplDiv = $('.editableSpecImpl');
         var container = $('.container');
         specImplDiv.detach();
@@ -341,3 +370,6 @@ $(document).ready(function() {
 
         
 });
+
+
+//I will format it into the MVC model. But today is not the da
