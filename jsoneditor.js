@@ -341,27 +341,18 @@ $(document).ready(function() {
         var pObj = $('#p'+(qnum+1));
         pObj.remove();
         
-        if (qnum == 0) {
-            questions.splice(0, 1);
-            for (q in questions) {
-                var num = questions[q].getNumber();
-                questions[q].setNumber(num-1);
-                questions[q].setObj($("<option>" + questions[q].getNumber + "</option>"));
-            }
+        questions.splice(qnum, 1) // remove element
+        for (q in questions) {
+            var num = questions[q].getNumber();
+            questions[q].setNumber(num-1);
+            questions[q].setObj($("<option>" + questions[q].getNumber() + "</option>"));
         }
-        else if ((qnum > 0) && (qnum < questions.length)) {
-            questions.splice(qnum, 1)
-            for (q in questions) {
-                var num = questions[q].getNumber();
-                questions[q].setObj($("<option>" + num + "</option>"));
-            }
-            
-            
-        }
+
         
         var e = document.getElementById('selectionBox');
         var strOp = e.options[e.selectedIndex].remove();
         $("#selectionBox option").each(function() {
+                
                 if ($(this).val() > qnum) {
                     var n = $(this).val();
                     $('#p' + n).attr('id', 'p'+String(n-1));
@@ -370,9 +361,7 @@ $(document).ready(function() {
         });
         $('.opButtons button').addClass('disabled');
         
-        if ($('select').empty()) {
-            editMode = false;
-        }
+        editMode = false;
         bind();
     }
     
