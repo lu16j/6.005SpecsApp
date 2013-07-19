@@ -177,6 +177,7 @@ $(document).ready(function() {
     Adds a spec form to the Specs div
     */
     function addSpec() {
+        
         counterspec += 1; 
         var spec = $("<div style='margin-right: 20px; margin-bottom: 15px;' class='spec" + counterspec +  "'>\
                     <input class='name' style='width:104px; font-family: monospace' type='text' placeholder='Spec name...'>\
@@ -188,6 +189,17 @@ $(document).ready(function() {
             decSpec($(this).attr("data-spec"));
         });
         $(".specs").append(spec);
+        
+        scrollPos = $('body').scrollTop();
+        moveScroll(scrollPos, counterspec, spec);
+        
+        
+    }
+    
+    function moveScroll(position, counter, obj) {
+        if ((counter % 2) == 1) {
+            $('html, body').scrollTop($('.' + obj.attr('class')).outerHeight(true) + position);
+        }
     }
     
     /*
@@ -195,6 +207,9 @@ $(document).ready(function() {
     */    
     function decSpec(specNum) {
         $(".spec" + specNum).remove();
+        if ((!counterspec == 0 )) {
+            counterspec--;
+        }
 
         
         
@@ -213,7 +228,10 @@ $(document).ready(function() {
         impl.find("button").on('click', function() {
            decImpl($(this).attr("data-impl")); 
         });
-        $(".impl").append(impl);     
+        $(".impl").append(impl); 
+        
+        scrollPos = $('body').scrollTop();
+        moveScroll(scrollPos, counterimpl, impl);
     }
     
     /*
@@ -221,6 +239,9 @@ $(document).ready(function() {
     */
     function decImpl(implNum) {
         $(".impl" + implNum).remove();
+        if ((!counterimpl == 0 )) {
+            counterimpl--;
+        }
     }
     
     /*
@@ -229,6 +250,7 @@ $(document).ready(function() {
     function bind(num) {
         $(".add").off();
         $(".add").on('click', addSpec);
+        
         
         $(".dec").each(function() {
             $(this).off();
